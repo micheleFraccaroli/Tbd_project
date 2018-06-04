@@ -1,0 +1,8 @@
+C:\Users\miche\Desktop\tbd_project\tbd_project\bin\Debug\tbd_project.exe.config
+C:\Users\miche\Desktop\tbd_project\tbd_project\bin\Debug\tbd_project.exe
+C:\Users\miche\Desktop\tbd_project\tbd_project\bin\Debug\tbd_project.pdb
+C:\Users\miche\Desktop\tbd_project\tbd_project\obj\Debug\tbd_project.csprojResolveAssemblyReference.cache
+C:\Users\miche\Desktop\tbd_project\tbd_project\obj\Debug\tbd_project.exe
+C:\Users\miche\Desktop\tbd_project\tbd_project\obj\Debug\tbd_project.pdb
+C:\Users\miche\Desktop\tbd_project\tbd_project\obj\Debug\tbd_project.Form1.resources
+C:\Users\miche\Desktop\tbd_project\tbd_project\obj\Debug\tbd_project.csproj.GenerateResource.Cache
