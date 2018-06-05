@@ -13,13 +13,23 @@ namespace tbd_project
         public void getUsers()
         {
             String check = null;
-            Console.WriteLine("--- View user into system ---\n");
+            Console.Clear();
+            Console.WriteLine("--- View user into system ---");
+            Console.WriteLine("[b for return to main menù]");
+
+            String back = Console.ReadLine();
+            if (back.Equals("b"))
+            {
+                tbd_project.main main = new main();
+                //main.Menu();
+                System.Environment.Exit(1); // momentaneamente chiudo l'app
+            }
 
             Console.WriteLine("Name: ");
             String name = Console.ReadLine();
             Console.WriteLine("Procedo?[Yes/no]");
             check = Console.ReadLine();
-            if(check.Equals("Yes") || check.Equals("yes"))
+            if(check.Equals("Y") || check.Equals("y"))
             {
                 Commit(name);
             }
@@ -27,7 +37,7 @@ namespace tbd_project
             String surname = Console.ReadLine();
             Console.WriteLine("Procedo?[Yes/no]");
             check = Console.ReadLine();
-            if (check.Equals("Yes") || check.Equals("yes"))
+            if (check.Equals("Y") || check.Equals("y"))
             {
                 Commit(name, surname);
             }
@@ -35,7 +45,7 @@ namespace tbd_project
             String email = Console.ReadLine();
             Console.WriteLine("Procedo?[Yes/no]");
             check = Console.ReadLine();
-            if (check.Equals("Yes") || check.Equals("yes"))
+            if (check.Equals("Y") || check.Equals("y"))
             {
                 Commit(name, surname, email);
             }
@@ -43,7 +53,7 @@ namespace tbd_project
             String date = Console.ReadLine();
             Console.WriteLine("Procedo?[Yes/no]");
             check = Console.ReadLine();
-            if (check.Equals("Yes") || check.Equals("yes"))
+            if (check.Equals("Y") || check.Equals("y"))
             {
                 Commit(name, surname, email, date);
             }
@@ -56,18 +66,18 @@ namespace tbd_project
 
         public void Commit(String name = "", String surname = "", String email = "", String date = "")
         {
-            String query = "SELECT * FROM dbo.users WHERE ";
+            String query = "USE DB_Test;SELECT * FROM dbo.users WHERE ";
             if(!name.Equals(""))
             {
-                query = query + "name = '" + name + "' AND";
+                query = query + "name = '" + name + "' AND ";
             }
             if (!surname.Equals(""))
             {
-                query = query + "surname = '" + surname + "' AND";
+                query = query + "surname = '" + surname + "' AND ";
             }
             if (!email.Equals(""))
             {
-                query = query + "email = '" + email + "' AND";
+                query = query + "email = '" + email + "' AND ";
             }
             if (!date.Equals(""))
             {
@@ -88,7 +98,12 @@ namespace tbd_project
             {
                 if (reader.Read())
                 {
-                    Console.WriteLine(String.Format("{0}", reader["id"]));
+                    Console.WriteLine(String.Format("{0}", reader["name"]));   //name
+                    Console.WriteLine(String.Format("{0}", reader["surname"]));   //surname
+                    Console.WriteLine(String.Format("{0}", reader["email"]));   //email
+                    Console.WriteLine(String.Format("{0}", reader["pwd"]));   //pwd
+                    Console.WriteLine(String.Format("{0}", reader["sex"]));   //sex
+                    Console.WriteLine(String.Format("{0}", reader["born"]));   //date
                 }
             }
         }
