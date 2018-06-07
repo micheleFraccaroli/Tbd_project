@@ -106,6 +106,9 @@ namespace tbd_project
                     Console.WriteLine(String.Format("{0}", reader["born"]));   //date
                 }
             }
+            con.Close();
+            Console.WriteLine("Press [Enter] to continue: ");
+            String enter = Console.ReadLine();
         }
     }
 }

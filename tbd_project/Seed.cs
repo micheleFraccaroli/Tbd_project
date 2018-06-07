@@ -56,6 +56,8 @@ namespace tbd_project
                 String confirm = Console.ReadLine();
                 adapter.InsertCommand = new SqlCommand(query, con);
                 adapter.InsertCommand.ExecuteNonQuery();
+
+                con.Close();
             }
         }
     }

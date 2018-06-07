@@ -14,10 +14,14 @@ namespace tbd_project
             tbd_project.Users usr = new Users();
             tbd_project.Seed seed = new Seed();
             tbd_project.Posts pst = new Posts();
+            tbd_project.DeleteUser delete = new DeleteUser();
+            tbd_project.Moderate moderate = new Moderate();
 
             //usr.getUsers();
             //seed.Seeding();
-            pst.getPosts();            
+            //pst.getPosts();
+            //delete.Delete();
+            moderate.updatePC();
         }
 
         public void Menu()

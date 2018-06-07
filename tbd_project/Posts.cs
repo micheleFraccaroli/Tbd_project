@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Data.SqlClient;
+using System.Data;
 using tbd_project;
 
 namespace tbd_project
@@ -47,17 +48,16 @@ namespace tbd_project
             con.Open();
 
             SqlCommand command = new SqlCommand(query, con);
-            using (SqlDataReader reader = command.ExecuteReader())
+            SqlDataReader reader = command.ExecuteReader();
+            
+            while(reader.Read())
             {
-                int c = 0;
-                if (reader.Read())
-                {
-                    do
-                    {
-                        Console.WriteLine(String.Format("{0}", reader["body"]));   //body post
-                    } while (reader.NextResult());
-                }
+                Console.WriteLine(String.Format("{0}", reader["body"]));   //body post
+
             }
+            con.Close();
+            Console.WriteLine("Press [Enter] to continue: ");
+            String enter = Console.ReadLine();
         }
     }
 }
