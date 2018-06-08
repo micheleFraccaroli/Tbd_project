@@ -93,19 +93,35 @@ namespace tbd_project
             Console.WriteLine(query);
             Console.WriteLine("OK?? ---> ");
             String confirm = Console.ReadLine();
-            SqlCommand command = new SqlCommand(query, con);
-            using (SqlDataReader reader = command.ExecuteReader())
+
+            try
             {
-                if (reader.Read())
+                SqlCommand command = new SqlCommand(query, con);
+                using (SqlDataReader reader = command.ExecuteReader())
                 {
-                    Console.WriteLine(String.Format("{0}", reader["name"]));   //name
-                    Console.WriteLine(String.Format("{0}", reader["surname"]));   //surname
-                    Console.WriteLine(String.Format("{0}", reader["email"]));   //email
-                    Console.WriteLine(String.Format("{0}", reader["pwd"]));   //pwd
-                    Console.WriteLine(String.Format("{0}", reader["sex"]));   //sex
-                    Console.WriteLine(String.Format("{0}", reader["born"]));   //date
+                    if (reader.Read())
+                    {
+                        Console.WriteLine(String.Format("{0}", reader["name"]));   //name
+                        Console.WriteLine(String.Format("{0}", reader["surname"]));   //surname
+                        Console.WriteLine(String.Format("{0}", reader["email"]));   //email
+                        Console.WriteLine(String.Format("{0}", reader["pwd"]));   //pwd
+                        Console.WriteLine(String.Format("{0}", reader["sex"]));   //sex
+                        Console.WriteLine(String.Format("{0}", reader["born"]));   //date
+                    }
                 }
             }
+            catch (Exception ex)
+            {
+                if (ex is SqlException)
+                {
+                    Console.WriteLine(ex);
+                }
+                else
+                {
+                    Console.WriteLine("Errore!");
+                }
+            }
+
             con.Close();
             Console.WriteLine("Press [Enter] to continue: ");
             String enter = Console.ReadLine();

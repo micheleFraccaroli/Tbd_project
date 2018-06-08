@@ -19,7 +19,7 @@ namespace tbd_project
             Console.WriteLine("Select what you want to moderate: \n1)Post\n2)Comment");
             String choice = Console.ReadLine();
 
-            if(choice.Equals('1'))
+            if(choice.Equals("1"))
             {
                 Console.WriteLine("Id post: ");
                 String id = Console.ReadLine();
@@ -27,10 +27,10 @@ namespace tbd_project
                 Console.WriteLine("New text: ");
                 String text = Console.ReadLine();
 
-                query = "USE DB_Test;UPDATE posts SET body = " + text + "WHERE id = " + Int32.Parse(id);
+                query = "USE DB_Test;UPDATE posts SET body = '" + text + "' WHERE id = " + Int32.Parse(id);
             }
 
-            else if(choice.Equals('2'))
+            else if(choice.Equals("2"))
             {
                 Console.WriteLine("Id comment: ");
                 String id = Console.ReadLine();
@@ -38,24 +38,41 @@ namespace tbd_project
                 Console.WriteLine("New text: ");
                 String text = Console.ReadLine();
 
-                query = "USE DB_Test;UPDATE comments SET body = " + text + "WHERE id = " + Int32.Parse(id);
+                query = "USE DB_Test;UPDATE comments SET body = '" + text + "' WHERE id = " + Int32.Parse(id);
             }
 
             Conn newConn = new Conn();
             SqlConnection con = newConn.fun();
             con.Open();
+            
+            try
+            {
+                SqlCommand command = con.CreateCommand();
+                command.CommandText = query;
+                int rows = command.ExecuteNonQuery();
 
-            SqlCommand command = con.CreateCommand();
-            command.CommandText = query;
-            command.ExecuteNonQuery();
-            /*SqlDataAdapter adapter = newConn.funA();
-            adapter.InsertCommand = new SqlCommand(query, con);
-            adapter.InsertCommand.ExecuteNonQuery();*/
-
-            con.Close();
-            Console.WriteLine("User and his posts deleted!");
-            Console.WriteLine("Press [Enter] to continue: ");
-            String enter = Console.ReadLine();
+                con.Close();
+                if (rows > 0)
+                {
+                    Console.WriteLine("Udated! " + rows.ToString() + " rows updated!");
+                }
+                else
+                {
+                    Console.WriteLine("Ops! " + rows.ToString() + " rows updated!");
+                }
+                Console.WriteLine("Press [Enter] to continue: ");
+                String enter = Console.ReadLine();
+            }
+            catch (Exception ex)
+            {
+                if (ex is SqlException)
+                {
+                    Console.WriteLine(ex);
+                }
+                else {
+                    Console.WriteLine("Errore!");
+                }
+            }
         }
     }
 }

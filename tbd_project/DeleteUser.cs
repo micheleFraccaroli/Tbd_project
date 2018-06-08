@@ -16,14 +16,6 @@ namespace tbd_project
             Console.Clear();
             Console.WriteLine("--- Deleting user ---");
 
-            /*String back = Console.ReadLine();
-            if (back.Equals("b"))
-            {
-                tbd_project.main main = new main();
-                //main.Menu();
-                System.Environment.Exit(1); // momentaneamente chiudo l'app
-            }*/
-
             Console.WriteLine("delete from:\n1)ID\n2)Name");
             String choice = Console.ReadLine();
 
@@ -45,11 +37,25 @@ namespace tbd_project
             SqlConnection con = newConn.fun();
             con.Open();
 
-            SqlDataAdapter adapter = newConn.funA();
-            adapter.InsertCommand = new SqlCommand(query, con);
-            adapter.InsertCommand.ExecuteNonQuery();
+            try
+            {
+                SqlDataAdapter adapter = newConn.funA();
+                adapter.InsertCommand = new SqlCommand(query, con);
+                adapter.InsertCommand.ExecuteNonQuery();
 
-            con.Close();
+                con.Close();
+            }
+            catch (Exception ex)
+            {
+                if (ex is SqlException)
+                {
+                    Console.WriteLine(ex);
+                }
+                else
+                {
+                    Console.WriteLine("Errore!");
+                }
+            }
             Console.WriteLine("User and his posts deleted!");
             Console.WriteLine("Press [Enter] to continue: ");
             String enter = Console.ReadLine();

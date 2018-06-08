@@ -49,13 +49,26 @@ namespace tbd_project
 
                 SqlConnection con = newConn.fun();
                 con.Open();
-
-                SqlDataAdapter adapter = newConn.funA();
-                Console.WriteLine(query);
-                Console.WriteLine("OK?? ---> ");
-                String confirm = Console.ReadLine();
-                adapter.InsertCommand = new SqlCommand(query, con);
-                adapter.InsertCommand.ExecuteNonQuery();
+                try
+                {
+                    SqlDataAdapter adapter = newConn.funA();
+                    Console.WriteLine(query);
+                    Console.WriteLine("OK?? ---> ");
+                    String confirm = Console.ReadLine();
+                    adapter.InsertCommand = new SqlCommand(query, con);
+                    adapter.InsertCommand.ExecuteNonQuery();
+                }
+                catch (Exception ex)
+                {
+                    if (ex is SqlException)
+                    {
+                        Console.WriteLine(ex);
+                    }
+                    else
+                    {
+                        Console.WriteLine("Errore!");
+                    }
+                }
 
                 con.Close();
             }

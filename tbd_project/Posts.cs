@@ -28,13 +28,13 @@ namespace tbd_project
             String check = Console.ReadLine();
             if (check.Equals("Y") || check.Equals("y"))
             {
-                query = "USE DB_Test;SELECT body FROM dbo.posts as p JOIN dbo.users as u ON p.id_user = u.id WHERE u.name LIKE '" + name + "'";
+                query = "USE DB_Test;SELECT p.body as bp, c.body as cp FROM dbo.posts as p JOIN dbo.users as u ON p.id_user = u.id JOIN dbo.comments as c ON p.id = c.ip_post WHERE u.name LIKE '" + name + "'";
             }
             else if(check.Equals("N") || check.Equals("n"))
             {
                 Console.WriteLine("Cognome: ");
                 String surname = Console.ReadLine();
-                query = "USE DB_Test;SELECT body FROM dbo.posts as p JOIN dbo.users as u ON p.id_user = u.id WHERE u.name LIKE '" + name + "' AND u.surname LIKE '" + surname + "'";
+                query = "USE DB_Test;SELECT p.body as bp, c.body as cp FROM dbo.posts as p JOIN dbo.users as u ON p.id_user = u.id JOIN dbo.comments as c ON p.id = c.ip_post WHERE u.name LIKE '" + name + "' AND u.surname LIKE '" + surname + "'";
             }
             else
             {
@@ -46,16 +46,31 @@ namespace tbd_project
             Conn newConn = new Conn();
             SqlConnection con = newConn.fun();
             con.Open();
-
-            SqlCommand command = new SqlCommand(query, con);
-            SqlDataReader reader = command.ExecuteReader();
-            
-            while(reader.Read())
+            try
             {
-                Console.WriteLine(String.Format("{0}", reader["body"]));   //body post
+                SqlCommand command = new SqlCommand(query, con);
+                SqlDataReader reader = command.ExecuteReader();
 
+                Console.WriteLine("[post -> comment]");
+                while (reader.Read())
+                {
+                    Console.WriteLine(String.Format("{0} -> {1}", reader["bp"], reader["cp"]));   //body post
+
+                }
+                con.Close();
             }
-            con.Close();
+            catch (Exception ex)
+            {
+                if (ex is SqlException)
+                {
+                    Console.WriteLine(ex);
+                }
+                else
+                {
+                    Console.WriteLine(ex);
+                }
+            }
+
             Console.WriteLine("Press [Enter] to continue: ");
             String enter = Console.ReadLine();
         }

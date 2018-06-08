@@ -47,7 +47,9 @@
   <ItemGroup>
     <Compile Include="DeleteUser.cs" />
     <Compile Include="main.cs" />
+    <Compile Include="Messages.cs" />
     <Compile Include="Moderate.cs" />
+    <Compile Include="Notify.cs" />
     <Compile Include="Posts.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
