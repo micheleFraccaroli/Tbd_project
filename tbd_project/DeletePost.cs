@@ -8,30 +8,15 @@ using tbd_project;
 
 namespace tbd_project
 {
-    class DeleteUser
+    class DeletePost
     {
-        public void Delete()
+        public void dPost(String postId)
         {
             String query = null;
             //Console.Clear();
-            Console.WriteLine("--- Deleting user ---");
+            Console.WriteLine("--- Deleting post ---");
 
-            Console.WriteLine("delete from:\n1)ID\n2)Name");
-            String choice = Console.ReadLine();
-
-            if (choice.Equals('1'))
-            {
-                query = "USE DB_Test;DELETE FROM dbo.users WHERE id = " + Int32.Parse(choice);
-            }
-            else
-            {
-                Console.WriteLine("Name: ");
-                String name = Console.ReadLine();
-                Console.WriteLine("Surname: ");
-                String surname = Console.ReadLine();
-
-                query = "USE DB_Test;DELETE FROM dbo.users WHERE name = '" + name + "' AND surname = '" + surname + "'";
-            }
+            query = "USE DB_Test;DELETE FROM dbo.posts WHERE id = " + Int32.Parse(postId);
 
             Conn newConn = new Conn();
             SqlConnection con = newConn.fun();
@@ -56,7 +41,7 @@ namespace tbd_project
                     Console.WriteLine("Errore!");
                 }
             }
-            Console.WriteLine("User and his posts deleted!");
+            Console.WriteLine("Post deleted!");
             Console.WriteLine("Press [Enter] to continue: ");
             String enter = Console.ReadLine();
         }

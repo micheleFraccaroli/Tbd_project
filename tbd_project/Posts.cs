@@ -14,6 +14,8 @@ namespace tbd_project
         public void getPosts()
         {
             Console.Clear();
+            tbd_project.main m = new main();
+            m.logo();
             Console.WriteLine("--- Seleziona post tramite utente ---");
             UserPosts();
         }
@@ -28,13 +30,13 @@ namespace tbd_project
             String check = Console.ReadLine();
             if (check.Equals("Y") || check.Equals("y"))
             {
-                query = "USE DB_Test;SELECT p.body as bp, c.body as cp FROM dbo.posts as p JOIN dbo.users as u ON p.id_user = u.id JOIN dbo.comments as c ON p.id = c.ip_post WHERE u.name LIKE '" + name + "'";
+                query = "USE DB_Test;SELECT p.id as id, p.body as bp, c.body as cp FROM dbo.posts as p JOIN dbo.users as u ON p.id_user = u.id JOIN dbo.comments as c ON p.id = c.ip_post WHERE u.name LIKE '" + name + "'";
             }
             else if(check.Equals("N") || check.Equals("n"))
             {
                 Console.WriteLine("Cognome: ");
                 String surname = Console.ReadLine();
-                query = "USE DB_Test;SELECT p.body as bp, c.body as cp FROM dbo.posts as p JOIN dbo.users as u ON p.id_user = u.id JOIN dbo.comments as c ON p.id = c.ip_post WHERE u.name LIKE '" + name + "' AND u.surname LIKE '" + surname + "'";
+                query = "USE DB_Test;SELECT p.id as id, p.body as bp, c.body as cp FROM dbo.posts as p JOIN dbo.users as u ON p.id_user = u.id JOIN dbo.comments as c ON p.id = c.ip_post WHERE u.name LIKE '" + name + "' AND u.surname LIKE '" + surname + "'";
             }
             else
             {
@@ -52,12 +54,22 @@ namespace tbd_project
                 SqlDataReader reader = command.ExecuteReader();
 
                 Console.WriteLine("[post -> comment]");
+                
                 while (reader.Read())
                 {
-                    Console.WriteLine(String.Format("{0} -> {1}", reader["bp"], reader["cp"]));   //body post
+                    Console.WriteLine(String.Format("{2}: {0} -> {1}", reader["bp"], reader["cp"], reader["id"]));   //body post
 
                 }
                 con.Close();
+
+                Console.WriteLine("[D] for delete: ");
+                String d = Console.ReadLine();
+                Console.WriteLine("Select post to delete white id: ");
+                String p = Console.ReadLine();
+
+                tbd_project.DeletePost dp = new DeletePost();
+                dp.dPost(p);
+
             }
             catch (Exception ex)
             {
@@ -73,6 +85,7 @@ namespace tbd_project
 
             Console.WriteLine("Press [Enter] to continue: ");
             String enter = Console.ReadLine();
+            
         }
     }
 }

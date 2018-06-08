@@ -45,6 +45,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DeletePost.cs" />
     <Compile Include="DeleteUser.cs" />
     <Compile Include="main.cs" />
     <Compile Include="Messages.cs" />

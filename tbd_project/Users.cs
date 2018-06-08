@@ -14,6 +14,8 @@ namespace tbd_project
         {
             String check = null;
             Console.Clear();
+            tbd_project.main m = new main();
+            m.logo();
             Console.WriteLine("--- View user into system ---");
             Console.WriteLine("[b for return to main menù]");
 

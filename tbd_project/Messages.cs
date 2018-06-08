@@ -19,7 +19,7 @@ namespace tbd_project
             String id1 = null;
             String id2 = null;
 
-            Console.Clear();
+            //Console.Clear();
             Console.WriteLine("--- Messages between users ---");
 
             Console.WriteLine("Name user 1: ");
