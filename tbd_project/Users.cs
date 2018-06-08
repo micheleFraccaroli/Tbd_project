@@ -17,15 +17,6 @@ namespace tbd_project
             tbd_project.main m = new main();
             m.logo();
             Console.WriteLine("--- View user into system ---");
-            Console.WriteLine("[b for return to main menù]");
-
-            String back = Console.ReadLine();
-            if (back.Equals("b"))
-            {
-                tbd_project.main main = new main();
-                //main.Menu();
-                System.Environment.Exit(1); // momentaneamente chiudo l'app
-            }
 
             Console.WriteLine("Name: ");
             String name = Console.ReadLine();
@@ -34,6 +25,7 @@ namespace tbd_project
             if(check.Equals("Y") || check.Equals("y"))
             {
                 Commit(name);
+                return;
             }
             Console.WriteLine("Surname: ");
             String surname = Console.ReadLine();
@@ -42,6 +34,7 @@ namespace tbd_project
             if (check.Equals("Y") || check.Equals("y"))
             {
                 Commit(name, surname);
+                return;
             }
             Console.WriteLine("Email: ");
             String email = Console.ReadLine();
@@ -50,6 +43,7 @@ namespace tbd_project
             if (check.Equals("Y") || check.Equals("y"))
             {
                 Commit(name, surname, email);
+                return;
             }
             Console.WriteLine("Date: ");
             String date = Console.ReadLine();
@@ -58,6 +52,7 @@ namespace tbd_project
             if (check.Equals("Y") || check.Equals("y"))
             {
                 Commit(name, surname, email, date);
+                return;
             }
             else
             {
@@ -91,10 +86,6 @@ namespace tbd_project
             Conn newConn = new Conn();
             SqlConnection con = newConn.fun();
             con.Open();
-
-            Console.WriteLine(query);
-            Console.WriteLine("OK?? ---> ");
-            String confirm = Console.ReadLine();
 
             try
             {

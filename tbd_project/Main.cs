@@ -11,6 +11,7 @@ namespace tbd_project
     {
         public void logo()
         {
+            Console.Clear();
             Console.WriteLine("\n");
             Console.WriteLine("████████╗██████╗ ██████╗ ");
             Console.WriteLine("╚══██╔══╝██╔══██╗██╔══██╗");
@@ -32,45 +33,48 @@ namespace tbd_project
             tbd_project.Messages msg = new Messages();
             tbd_project.main m = new main();
 
-            m.logo();
+            while (true)
+            {
+                m.logo();
 
-            Console.WriteLine("--- Menù ---\n");
-            Console.WriteLine("1) Retrieve user\n" +
-                              "2) Retrieve posts and comments\n" +
-                              "3) Retrieve messages between users\n" +
-                              "4) Retrieve activity register\n" +
-                              "5) Moderate posts or comments\n" +
-                              "6) Delete user\n" +
-                              "7) Insert users\n");
+                Console.WriteLine("--- Menù ---\n");
+                Console.WriteLine("1) Retrieve user\n" +
+                                  "2) Retrieve posts and comments\n" +
+                                  "3) Retrieve messages between users\n" +
+                                  "4) Retrieve activity register\n" +
+                                  "5) Moderate posts or comments\n" +
+                                  "6) Delete user\n" +
+                                  "7) Insert users\n");
 
-            String choice = Console.ReadLine();
-            if (choice.Equals("1"))
-            {
-                usr.getUsers();
-            }
-            else if (choice.Equals("2"))
-            {
-                pst.getPosts();
-            }
-            else if (choice.Equals("3"))
-            {
-                msg.getMessage();
-            }
-            else if (choice.Equals("4"))
-            {
-                ntf.getNotify();
-            }
-            else if (choice.Equals("5"))
-            {
-                moderate.updatePC();
-            }
-            else if (choice.Equals("6"))
-            {
-                delete.Delete();    
-            }
-            else if (choice.Equals("7"))
-            {
-                seed.Seeding();    
+                String choice = Console.ReadLine();
+                if (choice.Equals("1"))
+                {
+                    usr.getUsers();
+                }
+                else if (choice.Equals("2"))
+                {
+                    pst.getPosts();
+                }
+                else if (choice.Equals("3"))
+                {
+                    msg.getMessage();
+                }
+                else if (choice.Equals("4"))
+                {
+                    ntf.getNotify();
+                }
+                else if (choice.Equals("5"))
+                {
+                    moderate.updatePC();
+                }
+                else if (choice.Equals("6"))
+                {
+                    delete.Delete();
+                }
+                else if (choice.Equals("7"))
+                {
+                    seed.Seeding();
+                }
             }
         }
     }

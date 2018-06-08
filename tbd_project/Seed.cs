@@ -13,17 +13,27 @@ namespace tbd_project
         public void Seeding()
         {
             int num, i;
+            String res = null;
             Conn newConn = new Conn();
             Console.WriteLine("Inserition:\n");
-
-            Console.WriteLine("Chi vuoi inserire? ");
-            String tab = Console.ReadLine();
 
             Console.WriteLine("Quanti ne vuoi inserire? ");
             String n = Console.ReadLine();
             Int32.TryParse(n, out num);
 
-            for (i = 0; i < num; i++)
+            String q = "USE DB_Test;SELECT COUNT(*) as count FROM dbo.users";
+            SqlConnection con = newConn.fun();
+            con.Open();
+            SqlCommand command = new SqlCommand(q, con);
+            using (SqlDataReader reader = command.ExecuteReader())
+            {
+                if (reader.Read())
+                {
+                    res = String.Format("{0}", reader["count"]);
+                }
+            }
+
+            for (i = Int32.Parse(res) ; i < num + Int32.Parse(res); i++)
             {
                 Console.WriteLine("Name: ");
                 String name = Console.ReadLine();
@@ -38,7 +48,7 @@ namespace tbd_project
                 Console.WriteLine("Data di nascita: ");
                 String born = Console.ReadLine();
 
-                String query = "USE DB_Test;INSERT INTO dbo." + tab + " (id,name,surname,email,pwd,sex,born) VALUES ("
+                String query = "USE DB_Test;INSERT INTO dbo.users (id,name,surname,email,pwd,sex,born) VALUES ("
                     + i + ",'"
                     + name + "','"
                     + surname + "','"
@@ -46,15 +56,10 @@ namespace tbd_project
                     + pwd + "','"
                     + sex + "','"
                     + born + "')";
-
-                SqlConnection con = newConn.fun();
-                con.Open();
+                
                 try
                 {
                     SqlDataAdapter adapter = newConn.funA();
-                    Console.WriteLine(query);
-                    Console.WriteLine("OK?? ---> ");
-                    String confirm = Console.ReadLine();
                     adapter.InsertCommand = new SqlCommand(query, con);
                     adapter.InsertCommand.ExecuteNonQuery();
                 }
